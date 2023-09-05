@@ -64,7 +64,7 @@ service:
 
 ftp:
     # If you need FTP configuration, choose one of the 2 methods of providing credentials
-    classic_ftp_secret: ftp-secret
+    classic_ftp_secret:
     netrc_secret:
     #classic_ftp_secret:
     #netrc_secret: netrc-secret
