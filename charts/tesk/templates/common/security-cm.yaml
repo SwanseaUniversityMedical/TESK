@@ -8,3 +8,4 @@ data:
   {{ $configKey }}: |
     {{- $configProperties | nindent 4 }}
 {{- end }}
+{{- end }}
