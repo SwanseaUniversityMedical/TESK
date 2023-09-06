@@ -86,3 +86,10 @@ ingress:
   tls: []
   host: ""
   hosts: []
+
+securityContext:
+  runAsUser: 1000
+  runAsGroup: 1000
+  capabilities:
+    drop:
+        - all

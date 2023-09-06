@@ -16,6 +16,10 @@ spec:
       containers:
       - name: tesk-api
         image: {{ .Values.tesk.image }}
+        {{- with .Values.securityContext }}
+        securityContext:
+          {{- . | toYaml | nindent 10 }}
+        {{- end }}
         env:
         - name: TESK_API_TASKMASTER_IMAGE_NAME
           value: {{ .Values.tesk.taskmaster_image_name }}
