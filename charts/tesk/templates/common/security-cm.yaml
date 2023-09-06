@@ -1,0 +1,10 @@
+{{- if .Values.extraConfigMap }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.extraConfigMap.name }}
+data:
+{{- range $configKey, $configProperties := .Values.extraConfigMap.data }}
+  {{ $configKey }}: |
+    {{- $configProperties | nindent 4 }}
+{{- end }}

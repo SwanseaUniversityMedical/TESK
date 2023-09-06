@@ -39,44 +39,40 @@ spec:
           value: {{ .Values.tesk.filer_retries | quote }}
         - name: SERVER_SERVLET_CONTEXT_PATH
           value: {{ .Values.ingress.path }}
-        {{ if .Values.tesk.tes_api_base_path }}
+        {{- if .Values.tesk.tes_api_base_path }}
         - name: OPENAPI_TASKEXECUTIONSERVICE_BASE_PATH
           value: {{ .Values.tesk.tes_api_base_path }}
-        {{ end }}
+        {{- end }}
         - name: TESK_API_SERVICE_INFO_LOCATION
           value: file:///etc/tesk/service-info/service-info.yaml
-        {{ if .Values.ftp.classic_ftp_secret }}
+        {{- if .Values.ftp.classic_ftp_secret }}
         - name: TESK_API_TASKMASTER_FTP_SECRET_NAME
           value: {{ .Values.ftp.classic_ftp_secret }}
-        {{ end }}
-        {{ if .Values.ftp.netrc_secret }}
+        {{- end }}
+        {{- if .Values.ftp.netrc_secret }}
         - name: TESK_API_TASKMASTER_ENVIRONMENT_NETRC_SECRET_NAME
           value: {{ .Values.ftp.netrc_secret }}
-        {{ end }}
+        {{- end }}
         - name: TESK_API_AUTHORISATION_ENV_SUBGROUP
           value: {{ .Values.auth.env_subgroup }}
         - name: TESK_API_AUTHORISATION_BASE_GROUP
           value: {{ .Values.auth.env_basegroup }}
         - name: SPRING_PROFILES_ACTIVE
           value: {{ .Values.auth.mode }}
-
-        {{ if .Values.transfer.active }}
+        {{- if .Values.transfer.active }}
         - name: TESK_API_TASKMASTER_ENVIRONMENT_HOST_BASE_PATH
           value: {{ .Values.transfer.wes_base_path }}
         - name: TESK_API_TASKMASTER_ENVIRONMENT_CONTAINER_BASE_PATH
           value: {{ .Values.transfer.tes_base_path }}
         - name: TESK_API_TASKMASTER_ENVIRONMENT_TRANSFER_PVC_NAME
           value: {{ .Values.transfer.pvc_name }}
-        {{ end }}
-
-        {{ if .Values.storageClass }}
+        {{- end }}
+        {{- if .Values.storageClass }}
         - name: TESK_API_TASKMASTER_ENVIRONMENT_STORAGE_CLASS_NAME
           value: {{ .Values.storageClass }}
-        {{ end }}
-
+        {{- end }}
         - name: TESK_API_TASKMASTER_DEBUG
           value: "{{ .Values.tesk.debug }}"
-
         - name: TESK_API_SWAGGER-OAUTH_SCOPES
           value: openid:Standard openid,eduperson_entitlement:Access to groups membership,profile:Identity info about user,email:Email
         - name: TESK_API_SWAGGER_OAUTH_CLIENT_ID
@@ -91,10 +87,12 @@ spec:
               name: oauth-client-secret
               key: secret
               optional: true
+        {{- with .Values.extraEnv }}
+        {{- . | toYaml | nindent 8 }}
+        {{- end }}
         volumeMounts:
           - name: service-info-config
             mountPath: /etc/tesk/service-info
-
         ports:
         - containerPort: {{ .Values.tesk.port }}
       volumes:
