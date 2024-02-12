@@ -93,6 +93,11 @@ spec:
 
         ports:
         - containerPort: {{ .Values.tesk.port }}
+
+      {{- if .Values.tesk.extraContainers }}
+      {{- toYaml .Values.airflow.extraContainers | nindent 6 }}
+      {{- end }}
+
       volumes:
         - name: service-info-config
           configMap:
