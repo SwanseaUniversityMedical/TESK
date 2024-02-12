@@ -95,7 +95,7 @@ spec:
         - containerPort: {{ .Values.tesk.port }}
 
       {{- if .Values.tesk.extraContainers }}
-      {{- toYaml .Values.airflow.extraContainers | nindent 6 }}
+      {{- toYaml .Values.tesk.extraContainers | nindent 6 }}
       {{- end }}
 
       volumes:
