@@ -102,3 +102,6 @@ spec:
         - name: service-info-config
           configMap:
             name: service-info-config
+        {{- if .Values.tesk.volumes }}
+        {{- toYaml .Values.tesk.volumes | nindent 8 }}
+        {{- end }}
