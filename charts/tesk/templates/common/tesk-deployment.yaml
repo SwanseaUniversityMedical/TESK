@@ -104,6 +104,9 @@ spec:
         - name: service-info-config
           configMap:
             name: service-info-config
+        - name: logs
+          persistentVolumeClaim:
+            claimName: log-0
         {{- if .Values.tesk.volumes }}
         {{- toYaml .Values.tesk.volumes | nindent 8 }}
         {{- end }}
