@@ -90,6 +90,8 @@ spec:
         volumeMounts:
           - name: service-info-config
             mountPath: /etc/tesk/service-info
+          - name: logs
+            mountPath: /tmp/spring.log
 
         ports:
         - containerPort: {{ .Values.tesk.port }}
