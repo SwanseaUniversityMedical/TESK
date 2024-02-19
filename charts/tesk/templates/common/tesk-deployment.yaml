@@ -92,6 +92,9 @@ spec:
             mountPath: /etc/tesk/service-info
           - name: logs
             mountPath: /tmp/spring.log
+          {{- if .Values.tesk.extraVolumeMounts }}
+          {{- toYaml .Values.tesk.extraVolumeMounts | nindent 10 }}
+          {{- end }}
 
         ports:
         - containerPort: {{ .Values.tesk.port }}
@@ -104,9 +107,6 @@ spec:
         - name: service-info-config
           configMap:
             name: service-info-config
-        - name: logs
-          persistentVolumeClaim:
-            claimName: log-0
-        {{- if .Values.tesk.volumes }}
-        {{- toYaml .Values.tesk.volumes | nindent 8 }}
+        {{- if .Values.tesk.extraVolumes }}
+        {{- toYaml .Values.tesk.extraVolumes | nindent 8 }}
         {{- end }}
