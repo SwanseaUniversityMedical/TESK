@@ -90,8 +90,6 @@ spec:
         volumeMounts:
           - name: service-info-config
             mountPath: /etc/tesk/service-info
-          - name: logs
-            mountPath: /tmp/spring.log
           {{- if .Values.tesk.extraVolumeMounts }}
           {{- toYaml .Values.tesk.extraVolumeMounts | nindent 10 }}
           {{- end }}
