@@ -11,3 +11,6 @@ spec:
   selector:
     app: tesk-api
   type: {{ if .Values.service.type }}{{ .Values.service.type }}{{ else }}'ClusterIP'{{ end }}
+  {{- if .Values.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.service.loadBalancerIP }}
+  {{- end }}

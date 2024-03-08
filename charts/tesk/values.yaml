@@ -59,8 +59,9 @@ service:
     # - LoadBalancer for cloud provider (gcloud) or empty otherwise
     # type: NodePort
     # node_port: 31567
-    type: ""
+    type: "LoadBalancer"
     node_port: ""
+    loadBalancerIP: 
 
 ftp:
     # If you need FTP configuration, choose one of the 2 methods of providing credentials
