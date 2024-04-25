@@ -32,6 +32,7 @@ tesk:
     debug: false
     executor_retries: 2
     filer_retries: 2
+    extraEnv: []
 
 transfer:
     # If you want local file systems support (i.e. 'file:' urls in inputs and outputs),

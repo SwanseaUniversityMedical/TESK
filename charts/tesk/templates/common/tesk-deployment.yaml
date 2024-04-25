@@ -87,6 +87,9 @@ spec:
               name: oauth-client-secret
               key: secret
               optional: true
+        {{- with .Values.tesk.extraEnv }}
+        {{- . | toYaml | nindent 8 }}
+        {{- end }}
         volumeMounts:
           - name: service-info-config
             mountPath: /etc/tesk/service-info
