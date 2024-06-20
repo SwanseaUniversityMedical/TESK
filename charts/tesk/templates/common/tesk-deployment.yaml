@@ -93,10 +93,21 @@ spec:
         volumeMounts:
           - name: service-info-config
             mountPath: /etc/tesk/service-info
+          {{- if .Values.tesk.extraVolumeMounts }}
+          {{- toYaml .Values.tesk.extraVolumeMounts | nindent 10 }}
+          {{- end }}
 
         ports:
         - containerPort: {{ .Values.tesk.port }}
+
+      {{- if .Values.tesk.extraContainers }}
+      {{- toYaml .Values.tesk.extraContainers | nindent 6 }}
+      {{- end }}
+
       volumes:
         - name: service-info-config
           configMap:
             name: service-info-config
+        {{- if .Values.tesk.extraVolumes }}
+        {{- toYaml .Values.tesk.extraVolumes | nindent 8 }}
+        {{- end }}
